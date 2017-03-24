@@ -6,11 +6,7 @@ export default class Registration extends Component {
         super(props);
         this.state = {firstName: '', lastName: '', gender: '', email: '', password: '',};
 
-        this.handleChangeFirstName = this.handleChangeFirstName.bind(this);
-        this.handleChangeLastName = this.handleChangeLastName.bind(this);
-        this.handleChangeGender = this.handleChangeGender.bind(this);
-        this.handleChangeEmail = this.handleChangeEmail.bind(this);
-        this.handleChangePassword = this.handleChangePassword.bind(this);
+        this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
@@ -19,24 +15,8 @@ export default class Registration extends Component {
         event.preventDefault();
     }
 
-    handleChangeFirstName(event) {
-        this.setState({firstName: event.target.value});
-    }
-
-    handleChangeLastName(event) {
-        this.setState({lastName: event.target.value});
-    }
-
-    handleChangePassword(event) {
-        this.setState({password: event.target.value});
-    }
-
-    handleChangeEmail(event) {
-        this.setState({email: event.target.value});
-    }
-
-    handleChangeGender(event) {
-        this.setState({gender: event.target.value});
+    handleChange(event) {
+        this.setState({[event.target.attributes.name.value]: event.target.value});
     }
 
     render() {
@@ -46,23 +26,23 @@ export default class Registration extends Component {
                 <label>
                     Firstname*
                     <Validation.components.Input errorClassName='is-invalid-input' value='' maxLength="15"
-                                                 name='firstname' validations={['required', 'alpha']}
-                                                 onChange={this.handleChangeFirstName}/>
+                                                 name='firstName' validations={['required', 'alpha']}
+                                                 onChange={this.handleChange}/>
                 </label>
             </div>
             <div>
                 <label>
                     Lastname*
                     <Validation.components.Input errorClassName='is-invalid-input' value='' maxLength="15"
-                                                 name='lastname' validations={['required', 'alpha']}
-                                                 onChange={this.handleChangeLastName}/>
+                                                 name='lastName' validations={['required', 'alpha']}
+                                                 onChange={this.handleChange}/>
                 </label>
             </div>
             <div>
                 <label>
                     Gender*
                     <Validation.components.Select errorClassName='is-invalid-input' name='gender' value=''
-                                                  validations={['required']} onChange={this.handleChangeGender}>
+                                                  validations={['required']} onChange={this.handleChange}>
                         <option value=''>Choose gender</option>
                         <option value='male'>Male</option>
                         <option value='female'>Female</option>
@@ -73,7 +53,7 @@ export default class Registration extends Component {
                 <label>
                     Email*
                     <Validation.components.Input errorClassName='is-invalid-input' value='' name='email'
-                                                 validations={['required', 'email']} onChange={this.handleChangeEmail}/>
+                                                 validations={['required', 'email']} onChange={this.handleChange}/>
                 </label>
             </div>
             <div>
@@ -82,7 +62,7 @@ export default class Registration extends Component {
                     <Validation.components.Input errorClassName='is-invalid-input' type='password' value=''
                                                  minLength="6" maxLength="15" name='password'
                                                  validations={['required', 'password']}
-                                                 onChange={this.handleChangePassword}/>
+                                                 onChange={this.handleChange}/>
                 </label>
             </div>
             <div>
